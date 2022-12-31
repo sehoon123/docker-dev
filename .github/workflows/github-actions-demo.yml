@@ -15,6 +15,13 @@ jobs:
     - name: test docker image
       run: docker run -e CI=true sehoon0519/docker-react-app npm run test -- --coverage
 
+    - name: Install AWS CLI 2
+      run: |
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        unzip awscliv2.zip
+        which aws
+        sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -22,16 +29,16 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-northeast-2
     
-    - name: Push to S3
-      uses: aws-actions/aws-s3-sync@v1
+    - name: Generate deployment package
+      run: zip -r deploy.zip . -x '*.git*' './src/*' './aws/*' awscliv2.zip
+
+    - name: Deploy to AWS Elastic Beanstalk
+      uses: einaregilsson/beanstalk-deploy@v19
       with:
-        app-name: docker-react-app
-        bucket-name: docker-react-app-s3
-        version-label: ${{ github.sha }}
-    
-    - name: Deploy to Elastic Beanstalk
-      uses: aws-actions/aws-elastic-beanstalk-deploy@v1
-      with:
-        app-name: docker-react-app
-        environment-name: docker-react-app-env
-        version-label: ${{ github.sha }}
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: docker-react-app
+        environment_name: docker-react-app-env
+        version_label: ${{ github.sha }}
+        region: ap-northeast-2
+        deployment_package: deploy.zip
