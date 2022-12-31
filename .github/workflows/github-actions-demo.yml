@@ -6,6 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: build and push a container image
-      run: docker build -f Dockerfile.dev -t sehoon0519/docker-react-dev
+      run: docker build -f Dockerfile.dev -t sehoon0519/docker-react-dev ./
 
         
