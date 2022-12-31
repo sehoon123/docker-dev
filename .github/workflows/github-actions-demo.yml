@@ -23,14 +23,14 @@ jobs:
         aws-region: ap-northeast-2
     
     - name: Push to S3
-      uses: aws-actions/aws-elasticbeanstalk-publish-to-s3@v1
+      uses: aws-actions/aws-s3-sync@v1
       with:
         app-name: docker-react-app
         bucket-name: docker-react-app-s3
         version-label: ${{ github.sha }}
     
     - name: Deploy to Elastic Beanstalk
-      uses: aws-actions/aws-elasticbeanstalk-deploy-version@v1
+      uses: aws-actions/aws-elastic-beanstalk-deploy@v1
       with:
         app-name: docker-react-app
         environment-name: docker-react-app-env
