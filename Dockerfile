@@ -1,4 +1,4 @@
-FROM node:alpine as builder
+FROM node:alpine
 
 WORKDIR /usr/src/app
 
@@ -14,4 +14,4 @@ FROM nginx
 
 EXPOSE 80 3000 8080
 
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+COPY --from=0 /usr/src/app/build /usr/share/nginx/html
