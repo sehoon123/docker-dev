@@ -30,10 +30,10 @@ jobs:
         aws-region: ap-northeast-2
     
     - name: Generate deployment package
-      run: zip -r deploy.zip . -x '*.git*' '*.dev' './src/*' './aws/*' awscliv2.zip
+      run: zip -r deploy.zip . -x '*.git*' 'docker-compose.yml' '*.dev' './src/*' './aws/*' awscliv2.zip
 
     - name: Deploy to AWS Elastic Beanstalk
-      uses: einaregilsson/beanstalk-deploy@v19
+      uses: einaregilsson/beanstalk-deploy@v21
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
