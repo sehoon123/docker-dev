@@ -30,7 +30,7 @@ jobs:
         version-label: ${{ github.sha }}
     
     - name: Deploy to Elastic Beanstalk
-      uses: aws-actions/aws-elasticbeanstalk-deploy-version@v1
+      uses: aws-actions/aws-elasticbeanstalk-deploy@v1
       with:
         app-name: docker-react-app
         environment-name: docker-react-app-env
