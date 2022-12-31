@@ -2,15 +2,6 @@ name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
-  # show current directory
-  pwd:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check out repository code
-      uses: actions/checkout@v3
-    - name: show current directory
-      run: ls ${{ github.workspace }}
-
   # build docker image using dockerfile in github repo
   build:
     runs-on: ubuntu-latest
