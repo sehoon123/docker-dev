@@ -18,7 +18,11 @@ jobs:
     - name: Check out repository code
       uses: actions/checkout@v3
     - name: build docker image
-      run: docker build -t github-actions-demo .
+      run: docker build -t sehoon0519/docker-react-app -f Dockerfile.dev ./
+    - name: test docker image
+      run: docker run -e CI=true sehoon0519/docker-react-app npm run test -- --coverage
+  
+
 
 
   
