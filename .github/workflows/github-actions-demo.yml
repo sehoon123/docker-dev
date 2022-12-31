@@ -15,8 +15,6 @@ jobs:
     - name: test docker image
       run: docker run -e CI=true sehoon0519/docker-react-app npm run test -- --coverage
 
-    run: echo "Success!"
-
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -37,11 +35,3 @@ jobs:
         app-name: docker-react-app
         environment-name: docker-react-app-env
         version-label: ${{ github.sha }}
-
-    
-  
-
-
-
-  
-
