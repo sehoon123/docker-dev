@@ -9,10 +9,11 @@ jobs:
     - name: show current directory
       run: ls -l
 
+  # build docker image using github repo as context
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: build and push a container image
-      run: docker build -f Dockerfile.dev -t sehoon0519/docker-react-dev ./
+    - name: build docker image
+      run: docker build -t github-actions-demo .
+  
 
-        
