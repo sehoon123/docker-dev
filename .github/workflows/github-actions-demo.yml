@@ -7,13 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: show current directory
-      run: ls -l
+      run: ls -l ${{ github.workspace }}
 
-  # build docker image using github repo as context
+  # build docker image using dockerfile in github repo
   build:
     runs-on: ubuntu-latest
     steps:
     - name: build docker image
       run: docker build -t github-actions-demo .
+
+
   
 
