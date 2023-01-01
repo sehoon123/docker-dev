@@ -9,8 +9,8 @@ jobs:
     - name: Check out repository code
       uses: actions/checkout@v3
 
-    - name: build docker image
-      run: docker build -t eb-tutorial .
+    # - name: build docker image
+    #   run: docker build -t eb-tutorial .
 
     - name: Install AWS CLI 2
       run: |
