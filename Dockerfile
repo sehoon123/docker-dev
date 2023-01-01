@@ -8,10 +8,12 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
+CMD ["npm", "start"]
 
-FROM nginx
+FROM nginx:alpine
+
+COPY nginx.conf /etc/nginx/conf.d/
 
 EXPOSE 80 
 
-COPY --from=0 /usr/src/app/build /usr/share/nginx/html
+CMD ["nginx", "-g", "daemon off;"]
